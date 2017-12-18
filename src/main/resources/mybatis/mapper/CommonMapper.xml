@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.xk.mybatis.mapper.CommonMapper">
+
+        <!--
+           动态查询：
+           1.普通的查询 √
+           2.分页查询  方言问题
+           3.日期查询 √
+           4.查询排序 √
+         -->
+           <select id="getData"  resultType="java.util.Map" parameterType="java.util.Map">
+
+                       SELECT
+                             <if test="property==null">
+                                  *
+                             </if>
+                             <if test="property!=null">
+                                   ${property}
+                             </if>
+                        FROM ${tableName}
+                        <where>
+                                <if test="conds!=null">
+                                   <foreach collection="conds" item="cond"  separator="and" >
+                                       ${cond.column} ${cond.oper} ${cond.value}
+                                   </foreach>
+                                </if>
+                        </where>
+
+                       <if test="sorts!=null ">
+                           order by
+                           <foreach collection="sorts" item="sort"  separator="," >
+                              ${sort.property} ${sort.direction}
+                           </foreach>
+                       </if>
+
+           </select>
+  </mapper>
