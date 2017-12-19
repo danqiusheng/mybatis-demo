@@ -1,6 +1,7 @@
 package com.xk.mybatis.service;
 
 import com.xk.mybatis.mapper.CommonMapper;
+import com.xk.mybatis.mapper.gp.GPMapper;
 import com.xk.mybatis.model.QueryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,15 @@ public class CommonService {
     @Autowired
     private CommonMapper commonMapper;
 
+
     @Transactional(readOnly=true)
     public List<Map<String,String>> getData(QueryDto queryDto){
         Map<String,Object> map  = new HashMap<>();
+
         if(queryDto==null){
             return null;
         }
+
         // 设置表名
         map.put("tableName",queryDto.getTname());
         // 设置获取的属性名
@@ -40,4 +44,8 @@ public class CommonService {
         map.put("sorts",queryDto.generatorSort());
         return  commonMapper.getData(map);
     }
+
+
+
+
 }

@@ -44,12 +44,5 @@ public class NormalController {
     }
 
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
-    @ResponseBody
-    public APIResponse<List<Integer>> query(){
-
-
-        return null;
-    }
 
 }

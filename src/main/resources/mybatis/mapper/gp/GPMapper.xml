@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.xk.mybatis.mapper.CommonMapper">
+  <mapper namespace="com.xk.mybatis.mapper.gp.GPMapper">
 
         <!--
            动态查询：
@@ -35,4 +35,10 @@
                        </if>
 
            </select>
+    
+    
+    
+        <select id="searchCount" resultType="java.util.Map" >
+            select count(*),license from target_lib where license = '未识别' or license is null GROUP BY license
+        </select>
   </mapper>
